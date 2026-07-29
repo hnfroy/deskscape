@@ -4,7 +4,7 @@ import { getCurrentScene } from "@/lib/time";
 
 import DayScene from "./scenes/DayScene";
 import SunsetScene from "./scenes/SunsetScene";
-// import NightScene from "./scenes/NightScene";
+import NightScene from "./scenes/NightScene";
 
 export default function Window() {
   const scene = getCurrentScene();
@@ -13,7 +13,7 @@ export default function Window() {
     <div className="relative w-full h-full">
       {scene === "day" && <DayScene />}
       {scene === "sunset" && <SunsetScene />}
-      {/* {scene === "night" && <NightScene />} */}
+      {scene === "night" && <NightScene />}
     </div>
   );
 }

@@ -41,7 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={`w-64 flex flex-col gap-3 p-6 ${className}`}
+      className={`w-64 flex flex-col gap-3 ${className}`}
     >
       {/* Events & Notes */}
       {menuItems.map((item) => {
