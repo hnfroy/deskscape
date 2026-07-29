@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { asset } from "@/lib/path";
 
 export default function DayScene() {
   return (
@@ -119,7 +120,7 @@ export default function DayScene() {
           {/* Background */}
           <div className="bg">
             <Image
-              src="/scene/day/day.png"
+              src={asset("/scene/day/day.png")}
               alt=""
               fill
               priority
@@ -130,7 +131,7 @@ export default function DayScene() {
           {/* Cloud 1 */}
           <div className="cloud cloud1">
             <Image
-              src="/scene/day/cloud-1.svg"
+              src={asset("/scene/day/cloud-1.svg")}
               alt=""
               width={703}
               height={220}
@@ -140,7 +141,7 @@ export default function DayScene() {
           {/* Cloud 2 */}
           <div className="cloud cloud2">
             <Image
-              src="/scene/day/cloud-2.svg"
+              src={asset("/scene/day/cloud-2.svg")}
               alt=""
               width={562}
               height={250}
@@ -150,7 +151,7 @@ export default function DayScene() {
           {/* Cloud 3 */}
           <div className="cloud cloud3">
             <Image
-              src="/scene/day/cloud-3.svg"
+              src={asset("/scene/day/cloud-3.svg")}
               alt=""
               width={752}
               height={308}
@@ -162,7 +163,7 @@ export default function DayScene() {
         {/* Frame */}
         <div className="frame">
           <Image
-            src="/scene/day/frame.svg"
+            src={asset("/scene/day/frame.svg")}
             alt=""
             fill
             priority

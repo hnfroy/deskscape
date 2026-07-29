@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { asset } from "@/lib/path";
 
 export default function SunsetScene() {
   const [frame, setFrame] = useState(true);
@@ -110,7 +111,7 @@ export default function SunsetScene() {
           {/* Background */}
           <div className="bg">
             <Image
-              src="/scene/sunset/sunset.png"
+              src={asset("/scene/sunset/sunset.png")}
               alt=""
               fill
               priority
@@ -126,26 +127,30 @@ export default function SunsetScene() {
             ["small", "fly4"],
             ["small", "fly5"],
             ["small", "fly6"],
-            ].map(([size, fly], i) => (
-            <div key={i} className={`bird ${size} ${fly}`}>
-                <Image
+          ].map(([size, fly], i) => (
+            <div
+              key={i}
+              className={`bird ${size} ${fly}`}
+            >
+              <Image
                 src={
-                    frame
-                    ? "/scene/sunset/burung-a.svg"
-                    : "/scene/sunset/burung-b.svg"
+                  frame
+                    ? asset("/scene/sunset/burung-a.svg")
+                    : asset("/scene/sunset/burung-b.svg")
                 }
                 alt=""
                 width={220}
                 height={120}
-                />
+              />
             </div>
-            ))}
+          ))}
+
         </div>
 
         {/* Frame */}
         <div className="frame">
           <Image
-            src="/scene/sunset/frame.svg"
+            src={asset("/scene/sunset/frame.svg")}
             alt=""
             fill
             priority
