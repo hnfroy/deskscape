@@ -1,0 +1,55 @@
+.calendarScope {
+  --calendar-shadow: #1d1e1e;
+  --calendar-stand-side: #816e97;
+  --calendar-stand-base: #957eae;
+  --calendar-paper-back: #c2a3dd;
+  --calendar-paper-front: #f6ede2;
+  --calendar-ring: #000000;
+
+  position: relative;
+  width: 880px;
+  height: 674px;
+  max-width: 100%;
+  aspect-ratio: 880 / 674;
+  perspective: 1600px;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* base = surface + stand + paper-back + rings, never animates */
+.base {
+  z-index: 1;
+}
+
+/* the page that flips */
+.paperFront {
+  z-index: 2;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transform-origin: 50% 3.7%; /* ring line: 25 / 674 */
+  will-change: transform;
+}
+
+/* text sits on the same layer as the art so it flips together */
+.dateOverlay {
+  position: absolute;
+  left: 17.05%; /* 150 / 880 */
+  top: 8.9%; /* 60 / 674 */
+  width: 80.7%; /* 710 / 880 */
+  height: 86%; /* 580 / 674 */
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  overflow-wrap: break-word;
+}
+
+.ring {
+  cursor: pointer;
+  transform-box: fill-box;
+  transform-origin: center;
+}
