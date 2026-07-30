@@ -1,5 +1,6 @@
 "use client";
 
+import { asset } from "@/lib/path";
 import Image from "next/image";
 
 export default function QuoteFrame() {
@@ -8,7 +9,7 @@ export default function QuoteFrame() {
 
       {/* Frame */}
       <Image
-        src="/wall/frames.svg"
+        src={asset("/wall/frames.svg")}
         alt="Quote Frame"
         fill
         priority
