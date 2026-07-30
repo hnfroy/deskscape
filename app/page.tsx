@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import RuntimeCanvas from "@/components/layout/RuntimeCanvas";
 import DeskScene from "@/components/scene/DeskScene";
 import DesktopCanvas from "@/components/DesktopCanvas";
+import { asset } from "@/lib/path";
 
 export default function Home() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -41,7 +42,8 @@ export default function Home() {
     <>
       <audio
         ref={audioRef}
-        src="/music/Way Home - Tokyowalker.mp3"
+        // src="/music/Way Home - Tokyowalker.mp3"
+        src={asset("/music/Way Home - Tokyowalker.mp3")}
       />
 
       <DesktopCanvas>
