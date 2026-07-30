@@ -1,12 +1,9 @@
 export default function Walls() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="auto" viewBox="0 0 1440 1024" fill="none">
-        <mask id="path-1-inside-1_301_291" fill="white">
-        <path d="M0 0H361V1024H0V0Z"/>
-        </mask>
-        <path d="M0 0H361V1024H0V0Z" fill="#F1E3D5"/>
-        <path d="M361 0H357V1024H361H365V0H361Z" fill="black" mask="url(#path-1-inside-1_301_291)"/>
-        <path d="M361 0H1440V1024H361V0Z" fill="#F1E3D5"/>
+    <svg width="1800" height="1024" viewBox="0 0 1800 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0H451.25V1024H0V0Z" fill="#F1E3D5"/>
+      <path d="M451.25 0V1024H447.25V0H451.25Z" fill="black"/>
+      <path d="M451.25 0H1800V1024H451.25V0Z" fill="#F1E3D5"/>
     </svg>
   );
 }

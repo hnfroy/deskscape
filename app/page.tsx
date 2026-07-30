@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import DesktopCanvas from "@/components/DesktopCanvas";
+import RuntimeCanvas from "@/components/layout/RuntimeCanvas";
 import DeskScene from "@/components/scene/DeskScene";
+import DesktopCanvas from "@/components/DesktopCanvas";
 
 export default function Home() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -37,24 +38,20 @@ export default function Home() {
   };
 
   return (
-    <div className="fixed inset-0 overflow-hidden bg-[#BFBFBF]">
-
-      {/* Audio */}
+    <>
       <audio
         ref={audioRef}
         src="/music/Way Home - Tokyowalker.mp3"
       />
 
       <DesktopCanvas>
-
           <DeskScene
               activeMenu={activeMenu}
               setActiveMenu={setActiveMenu}
               isPlaying={isPlaying}
               onToggleMusic={toggleMusic}
           />
-
       </DesktopCanvas>
-    </div>
+    </>
   );
 }

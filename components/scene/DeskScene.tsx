@@ -1,15 +1,20 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
+
 import Calendar from "@/components/calendar/Calendar";
+
 import QuoteFrame from "@/components/dayroom/QuoteFrame";
 import Sidebar from "@/components/dayroom/Sidebar";
-import DeskSurface from "@/components/dayroom/Desksurface";
 import Wall from "@/components/dayroom/Walls";
+
+import DeskSurface from "@/components/dayroom/Desksurface";
 import Mug from "@/components/desk/Mug";
+
 import Window from "@/components/window/Window";
 
-import SceneObject from "../layout/SceneObject";
+import SceneObject from "@/components/layout/SceneObject";
+
 import { SCENE } from "@/lib/scene";
 
 interface Props {
@@ -25,76 +30,85 @@ export default function DeskScene({
   isPlaying,
   onToggleMusic,
 }: Props) {
-  const { window, calendar, mug, quote, sidebar } = SCENE.objects;
+  const {
+    design,
+    room,
+    objects,
+  } = SCENE;
 
   return (
     <>
-      {/* Wall */}
+      {/* ================= Background ================= */}
+
       <SceneObject
         left={0}
         top={0}
-        w={SCENE.width}
-        h={SCENE.height}
+        w={design.width}
+        h={design.height}
         layer="wall"
       >
         <Wall />
       </SceneObject>
 
-      {/* Desk */}
-      <SceneObject left={0} bottom={0} w={SCENE.width} h={204} layer="desk">
+      <SceneObject
+        left={0}
+        bottom={0}
+        w={design.width}
+        h={room.deskHeight}
+        layer="desk"
+      >
         <DeskSurface />
       </SceneObject>
 
-      {/* Window */}
+      {/* ================= World ================= */}
+
       <SceneObject
-        right={window.right}
-        top={window.top}
-        w={window.w}
-        h={window.h}
+        right={objects.window.right}
+        top={objects.window.top}
+        w={objects.window.w}
+        h={objects.window.h}
         layer="window"
       >
         <Window />
       </SceneObject>
 
-      {/* Calendar */}
       <SceneObject
-        right={calendar.right}
-        bottom={calendar.bottom}
-        w={calendar.w}
-        h={calendar.h}
+        right={objects.calendar.right}
+        bottom={objects.calendar.bottom}
+        w={objects.calendar.w}
+        h={objects.calendar.h}
         layer="decor"
       >
         <Calendar />
       </SceneObject>
 
-      {/* Mug */}
       <SceneObject
-        left={mug.left}
-        bottom={mug.bottom}
-        w={mug.w}
-        h={mug.h}
+        left={objects.mug.left}
+        bottom={objects.mug.bottom}
+        w={objects.mug.w}
+        h={objects.mug.h}
         layer="decor"
       >
         <Mug />
       </SceneObject>
 
-      {/* Quote */}
       <SceneObject
-        left={quote.left}
-        top={quote.top}
-        w={quote.w}
-        h={quote.h}
+        left={objects.quote.left}
+        top={objects.quote.top}
+        w={objects.quote.w}
+        h={objects.quote.h}
         layer="decor"
       >
         <QuoteFrame />
       </SceneObject>
 
-      {/* Sidebar */}
+      {/* ================= UI ================= */}
+
       <SceneObject
-        left={sidebar.left}
-        top={sidebar.top}
-        w={sidebar.w}
-        h={sidebar.h}
+        left={objects.sidebar.left}
+        top={objects.sidebar.top}
+        w={objects.sidebar.w}
+        h={objects.sidebar.h}
         layer="sidebar"
       >
         <Sidebar
@@ -105,8 +119,12 @@ export default function DeskScene({
         />
       </SceneObject>
 
-      {/* Navbar */}
-      <SceneObject left={0} top={0} w={SCENE.width} layer="navbar">
+      <SceneObject
+        left={0}
+        top={0}
+        w={design.width}
+        layer="navbar"
+      >
         <Navbar />
       </SceneObject>
     </>

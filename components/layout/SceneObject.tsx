@@ -40,17 +40,17 @@ export default function SceneObject({
   style,
 }: SceneObjectProps) {
   const computedLeft =
-    left !== undefined
-      ? left
-      : right !== undefined && w !== undefined
-      ? SCENE.width - right - w
-      : undefined;
+  left !== undefined
+    ? left
+    : right !== undefined && w !== undefined
+    ? SCENE.design.width - right - w
+    : undefined;
 
   const computedTop =
     top !== undefined
       ? top
       : bottom !== undefined && h !== undefined
-      ? SCENE.height - bottom - h
+      ? SCENE.design.height - bottom - h
       : undefined;
 
   return (

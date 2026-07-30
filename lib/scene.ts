@@ -1,6 +1,20 @@
 export const SCENE = {
-  width: 1440,
-  height: 900,
+  design: {
+    width: 1800,
+    height: 860,
+  },
+
+  runtime: {
+    minScale: 0.5,
+    maxScale: 1,
+    fit: "contain",
+  },
+
+  room: {
+    wallHeight: 1024,
+    deskHeight: 204,
+    wallDivider: 361,
+  },
 
   layers: {
     wall: 10,
@@ -15,29 +29,29 @@ export const SCENE = {
 
   objects: {
     window: {
-      right: 90,
-      top: 10,
+      right: 60,
+      top: 50,
       w: 550,
       h: 480,
     },
 
     calendar: {
-      right: 400,
-      bottom: 50,
+      right: 500,
+      bottom: 0,
       w: 420,
       h: 420,
     },
 
     mug: {
-      left: 220,
-      bottom: 50,
+      left: 250,
+      bottom: 0,
       w: 200,
       h: 200,
     },
 
     quote: {
-      left: 420,
-      top: 50,
+      left: 500,
+      top: 100,
       w: 190,
       h: 190,
     },
