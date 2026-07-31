@@ -13,18 +13,13 @@ export default function Timebox() {
     return () => clearInterval(timer);
   }, []);
 
-  const hour = now.toLocaleString("en-US", {
-    hour: "2-digit",
-    hour12: true,
-  });
+  const hours24 = now.getHours();
 
-  const hourOnly = hour.split(" ")[0];
+  const hourOnly = String(hours24 % 12 || 12).padStart(2, "0");
 
-  const minute = now.toLocaleString("en-US", {
-    minute: "2-digit",
-  });
+  const minute = String(now.getMinutes()).padStart(2, "0");
 
-  const ampm = hour.split(" ")[1];
+  const ampm = hours24 >= 12 ? "PM" : "AM";
 
   const day = now
     .toLocaleDateString("en-US", {
