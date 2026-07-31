@@ -97,7 +97,7 @@ export default function Timebox() {
 
           font-weight:700;
 
-          letter-spacing:.08em;
+          letter-spacing:0em;
 
           text-shadow:
             0 0 4px rgba(255,255,255,.7),
