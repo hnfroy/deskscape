@@ -131,14 +131,6 @@ const Navbar: React.FC<NavbarProps & { isStandaloneWidgets?: boolean }> = ({
             {formattedDate}
           </span>
         </button>
-
-        <button 
-          type="button"
-          aria-label="Open Menu"
-          className={`items-center justify-center p-2.5 ${buttonBaseClass}`}
-        >
-          <Menu className="w-6 h-6 text-black stroke-[2]" />
-        </button>
       </div>
     </header>
   );
