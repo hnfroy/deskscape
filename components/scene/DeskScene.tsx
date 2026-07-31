@@ -16,6 +16,7 @@ import Window from "@/components/window/Window";
 import SceneObject from "@/components/layout/SceneObject";
 
 import { SCENE } from "@/lib/scene";
+import TimeBox from "../dayroom/TimeBox";
 
 interface Props {
   activeMenu: string | null;
@@ -81,6 +82,16 @@ export default function DeskScene({
       >
         <Calendar />
       </SceneObject>
+
+      <SceneObject
+        left={objects.timeBox.left}
+        bottom={objects.timeBox.bottom}
+        w={objects.timeBox.w}
+        h={objects.timeBox.h}
+        layer="furniture"
+    >
+        <TimeBox />
+    </SceneObject>
 
       <SceneObject
         left={objects.mug.left}

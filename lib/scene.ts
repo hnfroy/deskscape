@@ -20,6 +20,7 @@ export const SCENE = {
     wall: 10,
     desk: 20,
     window: 30,
+    furniture: 35,
     decor: 40,
     sidebar: 50,
     navbar: 60,
@@ -37,14 +38,21 @@ export const SCENE = {
 
     calendar: {
       right: 500,
-      bottom: 0,
+      bottom: 10,
       w: 420,
       h: 420,
     },
 
+    timeBox: {
+      left: 380,
+      bottom: 140,
+      w: 330,
+      h: 180,
+    },
+
     mug: {
-      left: 250,
-      bottom: 0,
+      left: 200,
+      bottom: -20,
       w: 200,
       h: 200,
     },
