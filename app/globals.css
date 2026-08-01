@@ -336,3 +336,8 @@ body {
   }
 
 }
+
+.music-disc {
+  transform-box: fill-box;
+  transform-origin: center;
+}

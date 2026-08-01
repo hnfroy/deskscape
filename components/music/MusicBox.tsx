@@ -7,6 +7,13 @@ import {
   SkipForward,
 } from "lucide-react";
 
+const BASE_PATH =
+  process.env.NODE_ENV === "production"
+    ? "/deskscape"
+    : "";
+
+const MUSIC_URL = `${BASE_PATH}/music/way-home-tokyowalker.mp3`;
+
 export default function MusicBox() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -17,11 +24,10 @@ export default function MusicBox() {
   const song = {
     title: "Way Home",
     artist: "Tokyo Walker",
-    src: "/music/way-home-tokyowalker.mp3",
   };
 
   /* =========================
-     AUDIO
+     AUDIO EVENTS
   ========================= */
 
   useEffect(() => {
@@ -34,22 +40,75 @@ export default function MusicBox() {
     };
 
     const handleLoadedMetadata = () => {
-      setDuration(audio.duration);
+      if (Number.isFinite(audio.duration)) {
+        setDuration(audio.duration);
+      }
     };
 
     const handleEnded = () => {
       setIsPlaying(false);
       setCurrentTime(0);
+      audio.currentTime = 0;
     };
 
-    audio.addEventListener("timeupdate", handleTimeUpdate);
-    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
-    audio.addEventListener("ended", handleEnded);
+    const handlePlay = () => {
+      setIsPlaying(true);
+    };
+
+    const handlePause = () => {
+      setIsPlaying(false);
+    };
+
+    audio.addEventListener(
+      "timeupdate",
+      handleTimeUpdate
+    );
+
+    audio.addEventListener(
+      "loadedmetadata",
+      handleLoadedMetadata
+    );
+
+    audio.addEventListener(
+      "ended",
+      handleEnded
+    );
+
+    audio.addEventListener(
+      "play",
+      handlePlay
+    );
+
+    audio.addEventListener(
+      "pause",
+      handlePause
+    );
 
     return () => {
-      audio.removeEventListener("timeupdate", handleTimeUpdate);
-      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
-      audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener(
+        "timeupdate",
+        handleTimeUpdate
+      );
+
+      audio.removeEventListener(
+        "loadedmetadata",
+        handleLoadedMetadata
+      );
+
+      audio.removeEventListener(
+        "ended",
+        handleEnded
+      );
+
+      audio.removeEventListener(
+        "play",
+        handlePlay
+      );
+
+      audio.removeEventListener(
+        "pause",
+        handlePause
+      );
     };
   }, []);
 
@@ -62,16 +121,17 @@ export default function MusicBox() {
 
     if (!audio) return;
 
-    if (audio.paused) {
-      try {
+    try {
+      if (audio.paused) {
         await audio.play();
-        setIsPlaying(true);
-      } catch (error) {
-        console.error("Audio failed to play:", error);
+      } else {
+        audio.pause();
       }
-    } else {
-      audio.pause();
-      setIsPlaying(false);
+    } catch (error) {
+      console.error(
+        "Audio failed to play:",
+        error
+      );
     }
   };
 
@@ -79,18 +139,25 @@ export default function MusicBox() {
      NEXT
   ========================= */
 
-  const handleNext = () => {
+  const handleNext = async () => {
     const audio = audioRef.current;
 
     if (!audio) return;
 
-    // Karena sekarang baru ada 1 lagu,
-    // next akan mengulang lagu dari awal.
     audio.currentTime = 0;
 
-    if (isPlaying) {
-      audio.play().catch(console.error);
+    if (!audio.paused) {
+      try {
+        await audio.play();
+      } catch (error) {
+        console.error(
+          "Audio failed to play:",
+          error
+        );
+      }
     }
+
+    setCurrentTime(0);
   };
 
   /* =========================
@@ -115,27 +182,36 @@ export default function MusicBox() {
   ========================= */
 
   const formatTime = (time: number) => {
-    if (!Number.isFinite(time)) return "0:00";
+    if (!Number.isFinite(time)) {
+      return "0:00";
+    }
 
     const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
 
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+    const seconds = Math.floor(
+      time % 60
+    );
+
+    return `${minutes}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
   };
 
   return (
     <div className="relative w-full">
 
-      {/* AUDIO */}
+      {/* =========================
+          AUDIO
+      ========================= */}
 
       <audio
         ref={audioRef}
-        src={song.src}
+        src={MUSIC_URL}
         preload="metadata"
       />
 
       {/* =========================
-          MUSIC BOX SVG
+          MUSIC BOX
       ========================= */}
 
       <svg
@@ -145,6 +221,9 @@ export default function MusicBox() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
+
+        {/* BASE */}
+
         <rect
           x="1"
           y="138"
@@ -156,12 +235,16 @@ export default function MusicBox() {
           strokeWidth="2"
         />
 
+        {/* TOP */}
+
         <path
           d="M14.0625 1H210.938C213.069 1 215.035 2.14587 216.086 4L220.561 11.8994L223.649 22H1.35059L4.43848 11.8994L8.91406 4C9.9647 2.14587 11.9314 1 14.0625 1Z"
           fill="url(#paint1_linear_375_211)"
           stroke="black"
           strokeWidth="2"
         />
+
+        {/* BODY */}
 
         <rect
           x="1"
@@ -173,6 +256,8 @@ export default function MusicBox() {
           stroke="url(#paint2_linear_375_211)"
           strokeWidth="2"
         />
+
+        {/* SCREEN */}
 
         <rect
           x="10.5"
@@ -195,6 +280,7 @@ export default function MusicBox() {
               : "music-disc"
           }
         >
+
           <circle
             cx="61"
             cy="69"
@@ -219,13 +305,14 @@ export default function MusicBox() {
           />
 
           <path
-            d="M60.5146 64.9679C60.6396 64.4609 61.3604 64.4609 61.4854 64.9679L62.0282 67.1678C62.0614 67.3028 62.1494 67.4178 62.271 67.4852L64.2124 68.5628C64.5555 68.7533 64.5555 69.2467 64.2124 69.4372L62.271 70.5148C62.1494 70.5822 62.0614 70.6972 62.0282 70.8322L61.4854 73.0321C61.3604 73.5391 60.6396 73.5391 60.5146 73.0321L59.9718 70.8322C59.9386 70.6972 59.8506 70.5822 59.729 70.5148L57.7876 69.4372C57.4445 69.2467 57.4445 68.7533 57.7876 68.5628L59.729 67.4852C59.8506 67.4178 59.9386 67.3028 59.9718 67.1678L60.5146 64.9679Z"
+            d="M60.5146 64.9679C60.6396 64.4609 61.3604 64.4609 61.4854 64.9679L62.0282 67.1678C62.0614 67.3028 62.1494 67.4178 62.271 67.4852L64.2124 68.5628C64.5555 68.7533 64.5555 69.2467 64.2124 69.4372L62.271 70.5148C62.1494 70.5822 62.0614 70.6972 62.0282 70.8322L61.4854 73.0321C61.3604 73.5391 60.6396 73.5391 60.5146 73.0321L59.9718 70.8322C59.9386 70.6972 59.8506 70.5822 59.729 70.5148L57.7876 69.4372C57.4445 69.2467 57.4445 68.7533 57.7876 68.5628L59.729 67.4852C59.8506 67.4178 59.9386 67.3022 59.9718 67.1678L60.5146 64.9679Z"
             fill="#020204"
           />
+
         </g>
 
         {/* =========================
-            BUTTON BACKGROUND
+            BUTTONS
         ========================= */}
 
         <rect
@@ -249,6 +336,7 @@ export default function MusicBox() {
         />
 
         <defs>
+
           <linearGradient
             id="paint0_linear_375_211"
             x1="112.5"
@@ -258,7 +346,10 @@ export default function MusicBox() {
             gradientUnits="userSpaceOnUse"
           >
             <stop />
-            <stop offset="1" stopColor="#0F0D0B" />
+            <stop
+              offset="1"
+              stopColor="#0F0D0B"
+            />
           </linearGradient>
 
           <linearGradient
@@ -270,12 +361,30 @@ export default function MusicBox() {
             gradientUnits="userSpaceOnUse"
           >
             <stop stopColor="#3C3430" />
-            <stop offset="0.0493667" stopColor="#2D2825" />
-            <stop offset="0.231394" stopColor="#50433C" />
-            <stop offset="0.519231" stopColor="#3C3430" />
-            <stop offset="0.783654" stopColor="#50433C" />
-            <stop offset="0.952439" stopColor="#38312D" />
-            <stop offset="1" stopColor="#3C3430" />
+            <stop
+              offset="0.0493667"
+              stopColor="#2D2825"
+            />
+            <stop
+              offset="0.231394"
+              stopColor="#50433C"
+            />
+            <stop
+              offset="0.519231"
+              stopColor="#3C3430"
+            />
+            <stop
+              offset="0.783654"
+              stopColor="#50433C"
+            />
+            <stop
+              offset="0.952439"
+              stopColor="#38312D"
+            />
+            <stop
+              offset="1"
+              stopColor="#3C3430"
+            />
           </linearGradient>
 
           <linearGradient
@@ -287,7 +396,10 @@ export default function MusicBox() {
             gradientUnits="userSpaceOnUse"
           >
             <stop stopColor="#919191" />
-            <stop offset="0.0576923" stopColor="#353535" />
+            <stop
+              offset="0.0576923"
+              stopColor="#353535"
+            />
             <stop offset="1" />
           </linearGradient>
 
@@ -300,8 +412,12 @@ export default function MusicBox() {
             gradientTransform="translate(61 69) rotate(90) scale(38)"
           >
             <stop stopColor="#0D0D0B" />
-            <stop offset="1" stopColor="#22201C" />
+            <stop
+              offset="1"
+              stopColor="#22201C"
+            />
           </radialGradient>
+
         </defs>
       </svg>
 
@@ -311,9 +427,8 @@ export default function MusicBox() {
 
       <div className="music-player">
 
-        {/* Song info */}
-
         <div className="music-info">
+
           <div className="music-title">
             {song.title}
           </div>
@@ -321,9 +436,8 @@ export default function MusicBox() {
           <div className="music-artist">
             {song.artist}
           </div>
-        </div>
 
-        {/* Progress */}
+        </div>
 
         <div className="music-progress-row">
 
@@ -335,6 +449,7 @@ export default function MusicBox() {
             type="range"
             min="0"
             max={duration || 0}
+            step="0.01"
             value={currentTime}
             onChange={handleProgress}
             className="music-progress"
@@ -346,18 +461,24 @@ export default function MusicBox() {
 
         </div>
 
-        {/* Controls */}
-
         <div className="music-controls">
 
           <button
             type="button"
             onClick={togglePlay}
-            aria-label={isPlaying ? "Pause music" : "Play music"}
+            aria-label={
+              isPlaying
+                ? "Pause music"
+                : "Play music"
+            }
             className="music-button music-play"
           >
+
             {isPlaying ? (
-              <Pause size={11} strokeWidth={2.5} />
+              <Pause
+                size={11}
+                strokeWidth={2.5}
+              />
             ) : (
               <Play
                 size={11}
@@ -365,6 +486,7 @@ export default function MusicBox() {
                 fill="currentColor"
               />
             )}
+
           </button>
 
           <button
@@ -373,11 +495,13 @@ export default function MusicBox() {
             aria-label="Next music"
             className="music-button"
           >
+
             <SkipForward
               size={11}
               strokeWidth={2.5}
               fill="currentColor"
             />
+
           </button>
 
         </div>
@@ -391,7 +515,8 @@ export default function MusicBox() {
       <style jsx>{`
 
         .music-disc {
-          transform-origin: 61px 69px;
+          transform-box: fill-box;
+          transform-origin: center;
         }
 
         .music-disc-playing {
@@ -438,19 +563,15 @@ export default function MusicBox() {
 
         .music-info {
           min-width: 0;
-
           margin-bottom: 6px;
         }
 
         .music-title {
           overflow: hidden;
-
           white-space: nowrap;
-
           text-overflow: ellipsis;
 
           font-size: 18px;
-
           font-weight: 700;
 
           letter-spacing: -0.01em;
@@ -464,9 +585,7 @@ export default function MusicBox() {
           color: rgba(255,255,255,.5);
 
           white-space: nowrap;
-
           overflow: hidden;
-
           text-overflow: ellipsis;
         }
 
@@ -504,7 +623,6 @@ export default function MusicBox() {
           appearance: none;
 
           width: 5px;
-
           height: 5px;
 
           border-radius: 50%;
@@ -516,7 +634,6 @@ export default function MusicBox() {
 
         .music-progress::-moz-range-thumb {
           width: 5px;
-
           height: 5px;
 
           border: 0;
@@ -579,7 +696,6 @@ export default function MusicBox() {
 
         .music-play {
           background: #875f9a;
-
           color: white;
         }
 
