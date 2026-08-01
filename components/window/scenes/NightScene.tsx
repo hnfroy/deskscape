@@ -7,9 +7,9 @@ import { asset } from "@/lib/path";
 export default function NightScene() {
   const stars = [
     { left: "10%", top: "12%", size: "big", delay: "0s" },
-    { left: "22%", top: "28%", size: "small", delay: "1.2s" },
+    { left: "22%", top: "18%", size: "small", delay: "1.2s" },
     { left: "36%", top: "15%", size: "small", delay: "2.6s" },
-    { left: "48%", top: "30%", size: "big", delay: ".8s" },
+    { left: "48%", top: "20%", size: "big", delay: ".8s" },
     { left: "58%", top: "12%", size: "small", delay: "3s" },
     { left: "72%", top: "20%", size: "small", delay: "1.5s" },
     { left: "84%", top: "10%", size: "big", delay: "2s" },
