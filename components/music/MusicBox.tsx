@@ -479,7 +479,7 @@ export default function MusicBox() {
 
           width: 100%;
 
-          font-size: 5px;
+          font-size: 8px;
 
           color: rgba(255,255,255,.45);
         }
