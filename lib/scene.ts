@@ -51,10 +51,10 @@ export const SCENE = {
     },
 
     musicBox: {
-      left: 700,
+      left: 690,
       bottom: 140,
-      w: 360,
-      h: 250,
+      w: 340,
+      h: 230,
     },
 
     mug: {
