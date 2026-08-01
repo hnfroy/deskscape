@@ -118,19 +118,6 @@ const Navbar: React.FC<NavbarProps & { isStandaloneWidgets?: boolean }> = ({
             <span className="text-xs text-gray-600 font-medium">{weather.condition}</span>
           </div>
         </button>
-
-        <button 
-          type="button"
-          aria-label="View calendar"
-          className={`flex-col items-center justify-center px-3 py-1.5 min-w-[90px] ${buttonBaseClass}`}
-        >
-          <span className="text-sm font-bold text-black leading-none">
-            {timeString} <span className="text-xs">{period}</span>
-          </span>
-          <span className="text-xs text-gray-600 font-medium mt-0.5">
-            {formattedDate}
-          </span>
-        </button>
       </div>
     </header>
   );

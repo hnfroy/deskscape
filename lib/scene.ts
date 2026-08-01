@@ -37,7 +37,7 @@ export const SCENE = {
     },
 
     calendar: {
-      right: 330,
+      right: 350,
       bottom: 120,
       w: 400,
       h: 308,
@@ -52,14 +52,14 @@ export const SCENE = {
 
     musicBox: {
       left: 680,
-      bottom: 140,
+      bottom: 135,
       w: 350,
       h: 240,
     },
 
     mug: {
       left: 200,
-      bottom: -20,
+      bottom: 10,
       w: 200,
       h: 200,
     },

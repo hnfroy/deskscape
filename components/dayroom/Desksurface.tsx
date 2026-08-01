@@ -7,7 +7,7 @@ export default function DeskSurface() {
       </g>
       <defs>
       <filter id="filter0_n_301_299" x="0" y="0" width="1804" height="259" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feFlood floodOpacity="0" result="BackgroundImageFix"/>
       <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
       <feTurbulence type="fractalNoise" baseFrequency="1 1" stitchTiles="stitch" numOctaves="3" result="noise" seed="3592" />
       <feComponentTransfer in="noise" result="coloredNoise1">
