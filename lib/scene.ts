@@ -37,10 +37,10 @@ export const SCENE = {
     },
 
     calendar: {
-      right: 300,
-      bottom: 100,
-      w: 420,
-      h: 328,
+      right: 350,
+      bottom: 120,
+      w: 400,
+      h: 308,
     },
 
     timeBox: {
@@ -59,7 +59,7 @@ export const SCENE = {
 
     mug: {
       left: 200,
-      bottom: -20,
+      bottom: 10,
       w: 200,
       h: 200,
     },

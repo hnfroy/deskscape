@@ -88,9 +88,9 @@ export default function Calendar({ date = new Date() }: CalendarProps) {
         }}
       >
         {/* ROW 1: HEADER (Bulan di kiri, Navigasi Next/Prev di Kanan Berdempetan) */}
-        <div className="flex justify-between items-center mb-2 px-1">
+        <div className="flex justify-between items-center mb-1 px-1">
           {/* Box Kiri: Bulan & Tahun */}
-          <h2 className="text-xl font-black text-black tracking-wide uppercase">
+          <h2 className="text-lg font-black text-black tracking-wide uppercase">
             {format(selectedDate, "EE, dd MMM yyyy", { locale: id })}
           </h2>
 
@@ -98,15 +98,15 @@ export default function Calendar({ date = new Date() }: CalendarProps) {
           <div className="flex gap-1.5 lg:gap-2">
             <button 
               onClick={handlePrevMonth}
-              className="flex items-center justify-center w-7 h-7 bg-[#F9F5F0] rounded-full border-1 border-transparent hover:border-black hover:bg-black/5 active:translate-y-[2px] transition-all"
+              className="flex items-center justify-center w-6 h-6 bg-[#F9F5F0] rounded-full border-1 border-transparent hover:border-black hover:bg-black/5 active:translate-y-[2px] transition-all"
             >
-              <span className="text-lg lg:text-xl font-bold font-mono pb-1">{"<"}</span>
+              <span className="text-lg lg:text-xl font-bold font-mono">{"<"}</span>
             </button>
             <button 
               onClick={handleNextMonth}
-              className="flex items-center justify-center w-7 h-7 bg-[#F9F5F0] rounded-full border-1 border-transparent hover:border-black hover:bg-black/5 active:translate-y-[2px] transition-all"
+              className="flex items-center justify-center w-6 h-6 bg-[#F9F5F0] rounded-full border-1 border-transparent hover:border-black hover:bg-black/5 active:translate-y-[2px] transition-all"
             >
-              <span className="text-lg lg:text-xl font-bold font-mono pb-1">{">"}</span>
+              <span className="text-lg lg:text-xl font-bold font-mono">{">"}</span>
             </button>
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function Calendar({ date = new Date() }: CalendarProps) {
         {/* ROW 2: Header Nama Hari */}
         <div className="grid grid-cols-7 mb-1 gap-1">
           {weekDays.map(day => (
-            <div key={day} className="text-center font-bold lg:text-xs text-gray-800 uppercase tracking-widest pb-1">
+            <div key={day} className="text-center font-bold lg:text-xs text-gray-800 uppercase tracking-widest">
               {day}
             </div>
           ))}
@@ -136,7 +136,7 @@ export default function Calendar({ date = new Date() }: CalendarProps) {
                   type="button"
                   // Desain tombol dibuat persegi panjang 'rounded-md w-full' dan memiliki warna dasar ('bg-black/5') agar mirip seperti box abu-abu di wireframe
                   className={`
-                    flex items-center justify-center w-7 h-7 rounded-full text-xs lg:text-sm font-bold transition-all duration-200 cursor-pointer border-2
+                    flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer border-2
                     ${!isCurrentMonth 
                       ? 'text-gray-400/40 bg-transparent border-transparent' 
                       : isSelectedDay 
