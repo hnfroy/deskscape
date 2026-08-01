@@ -37,10 +37,10 @@ export const SCENE = {
     },
 
     calendar: {
-      right: 500,
+      right: 450,
       bottom: 10,
       w: 420,
-      h: 420,
+      h: 328,
     },
 
     timeBox: {
