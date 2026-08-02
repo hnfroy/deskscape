@@ -88,9 +88,9 @@ export default function Calendar({ date = new Date() }: CalendarProps) {
         }}
       >
         {/* ROW 1: HEADER (Bulan di kiri, Navigasi Next/Prev di Kanan Berdempetan) */}
-        <div className="flex justify-between items-center mb-2 px-1">
+        <div className="flex justify-between items-center mb-1 px-1">
           {/* Box Kiri: Bulan & Tahun */}
-          <h2 className="text-xl font-black text-black tracking-wide uppercase">
+          <h2 className="text-lg font-black text-black tracking-wide uppercase">
             {format(selectedDate, "EE, dd MMM yyyy", { locale: id })}
           </h2>
 
