@@ -22,15 +22,11 @@ import MusicBox from "../music/MusicBox";
 interface Props {
   activeMenu: string | null;
   setActiveMenu: (menu: string | null) => void;
-  isPlaying: boolean;
-  onToggleMusic: () => void;
 }
 
 export default function DeskScene({
   activeMenu,
   setActiveMenu,
-  isPlaying,
-  onToggleMusic,
 }: Props) {
   const {
     design,
@@ -136,8 +132,6 @@ export default function DeskScene({
         <Sidebar
           activeMenu={activeMenu}
           setActiveMenu={setActiveMenu}
-          isPlaying={isPlaying}
-          onToggleMusic={onToggleMusic}
         />
       </SceneObject>
 

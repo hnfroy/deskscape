@@ -2,14 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import RuntimeCanvas from "@/components/layout/RuntimeCanvas";
 import DeskScene from "@/components/scene/DeskScene";
 import DesktopCanvas from "@/components/DesktopCanvas";
 import { asset } from "@/lib/path";
 
 export default function Home() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -19,24 +17,7 @@ export default function Home() {
 
     audio.volume = 0.35;
     audio.loop = true;
-
-    audio.play().catch(() => {
-      setIsPlaying(false);
-    });
   }, []);
-
-  const toggleMusic = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (audio.paused) {
-      audio.play();
-      setIsPlaying(true);
-    } else {
-      audio.pause();
-      setIsPlaying(false);
-    }
-  };
 
   return (
     <>
@@ -48,10 +29,8 @@ export default function Home() {
 
       <DesktopCanvas>
           <DeskScene
-              activeMenu={activeMenu}
-              setActiveMenu={setActiveMenu}
-              isPlaying={isPlaying}
-              onToggleMusic={toggleMusic}
+            activeMenu={activeMenu}
+            setActiveMenu={setActiveMenu}
           />
       </DesktopCanvas>
     </>
