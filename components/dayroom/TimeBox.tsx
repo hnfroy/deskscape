@@ -117,7 +117,7 @@ export default function Timebox() {
 
           margin-bottom:20px;
 
-          font-size:14px;
+          font-size:18px;
 
           opacity:.8;
 
