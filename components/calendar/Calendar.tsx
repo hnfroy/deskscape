@@ -112,7 +112,7 @@ export default function Calendar({ date = new Date() }: CalendarProps) {
         </div>
 
         {/* ROW 2: Header Nama Hari */}
-        <div className="grid grid-cols-7 mb-1 gap-1">
+        <div className="grid grid-cols-7 gap-1">
           {weekDays.map(day => (
             <div key={day} className="text-center font-bold lg:text-xs text-gray-800 uppercase tracking-widest pb-1">
               {day}
@@ -136,7 +136,7 @@ export default function Calendar({ date = new Date() }: CalendarProps) {
                   type="button"
                   // Desain tombol dibuat persegi panjang 'rounded-md w-full' dan memiliki warna dasar ('bg-black/5') agar mirip seperti box abu-abu di wireframe
                   className={`
-                    flex items-center justify-center w-7 h-7 rounded-full text-xs lg:text-sm font-bold transition-all duration-200 cursor-pointer border-2
+                    flex items-center justify-center w-6 h-6 rounded-full text-xs lg:text-sm font-bold transition-all duration-200 cursor-pointer border-2
                     ${!isCurrentMonth 
                       ? 'text-gray-400/40 bg-transparent border-transparent' 
                       : isSelectedDay 

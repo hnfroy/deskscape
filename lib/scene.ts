@@ -39,8 +39,8 @@ export const SCENE = {
     calendar: {
       right: 330,
       bottom: 120,
-      w: 400,
-      h: 308,
+      w: 380,
+      h: 295,
     },
 
     timeBox: {
