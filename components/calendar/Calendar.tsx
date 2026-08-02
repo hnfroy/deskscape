@@ -100,13 +100,13 @@ export default function Calendar({ date = new Date() }: CalendarProps) {
               onClick={handlePrevMonth}
               className="flex items-center justify-center w-7 h-7 bg-[#F9F5F0] rounded-full border-1 border-transparent hover:border-black hover:bg-black/5 active:translate-y-[2px] transition-all"
             >
-              <span className="text-lg lg:text-xl font-bold font-mono pb-1">{"<"}</span>
+              <span className="text-lg lg:text-xl font-bold font-mono">{"<"}</span>
             </button>
             <button 
               onClick={handleNextMonth}
               className="flex items-center justify-center w-7 h-7 bg-[#F9F5F0] rounded-full border-1 border-transparent hover:border-black hover:bg-black/5 active:translate-y-[2px] transition-all"
             >
-              <span className="text-lg lg:text-xl font-bold font-mono pb-1">{">"}</span>
+              <span className="text-lg lg:text-xl font-bold font-mono">{">"}</span>
             </button>
           </div>
         </div>
