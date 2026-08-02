@@ -87,6 +87,26 @@ export default function MusicBox() {
     };
   }, []);
 
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    if (!audio) return;
+
+    const autoPlay = async () => {
+      try {
+        audio.volume = 0.5;
+
+        await audio.play();
+
+        setIsPlaying(true);
+      } catch (error) {
+        console.log("Autoplay blocked by browser.");
+      }
+    };
+
+    autoPlay();
+  }, []);
+
   /* =========================
      PLAY / PAUSE
   ========================= */

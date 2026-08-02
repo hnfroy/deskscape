@@ -3,8 +3,8 @@
 <path d="M27.5 15L30.8761 24.1239L40 27.5L30.8761 30.8761L27.5 40L24.1239 30.8761L15 27.5L24.1239 24.1239L27.5 15Z" fill="#FAFFB3"/>
 </g>
 <defs>
-<filter id="filter0_d_351_224" x="0" y="0" width="55" height="55" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<filter id="filter0_d_351_224" x="0" y="0" width="55" height="55" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
 <feOffset/>
 <feGaussianBlur stdDeviation="7.5"/>

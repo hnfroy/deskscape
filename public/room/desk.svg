@@ -8,8 +8,8 @@
 <path d="M1391 4H1440V204H1391V4Z" fill="#D7BC9B"/>
 </g>
 <defs>
-<filter id="filter0_n_301_299" x="0" y="0" width="1440" height="204" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<filter id="filter0_n_301_299" x="0" y="0" width="1440" height="204" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
 <feTurbulence type="fractalNoise" baseFrequency="1 1" stitchTiles="stitch" numOctaves="3" result="noise" seed="1078" />
 <feComponentTransfer in="noise" result="coloredNoise1">
@@ -27,8 +27,8 @@
 <feMergeNode in="color1" />
 </feMerge>
 </filter>
-<filter id="filter1_n_301_299" x="0" y="4" width="1440" height="200" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<filter id="filter1_n_301_299" x="0" y="4" width="1440" height="200" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
 <feTurbulence type="fractalNoise" baseFrequency="1 1" stitchTiles="stitch" numOctaves="3" result="noise" seed="3592" />
 <feComponentTransfer in="noise" result="coloredNoise1">

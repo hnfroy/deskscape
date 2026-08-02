@@ -73,7 +73,7 @@ export const SCENE = {
 
     sidebar: {
       left: 20,
-      top: 120,
+      top: 100,
       w: 260,
       h: 500,
     },
