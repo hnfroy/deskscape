@@ -37,7 +37,7 @@ export const SCENE = {
     },
 
     calendar: {
-      right: 330,
+      right: 350,
       bottom: 120,
       w: 380,
       h: 295,
