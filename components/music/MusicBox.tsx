@@ -7,6 +7,14 @@ import {
   SkipForward,
 } from "lucide-react";
 
+const BASE_PATH =
+  process.env.NODE_ENV === "production"
+    ? "/deskscape"
+    : "";
+
+const MUSIC_URL =
+  `${BASE_PATH}/music/way-home-tokyowalker.mp3`;
+
 export default function MusicBox() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -17,7 +25,7 @@ export default function MusicBox() {
   const song = {
     title: "Way Home",
     artist: "Tokyo Walker",
-    src: "/music/way-home-tokyowalker.mp3",
+    src: MUSIC_URL,
   };
 
   /* =========================
@@ -34,22 +42,48 @@ export default function MusicBox() {
     };
 
     const handleLoadedMetadata = () => {
-      setDuration(audio.duration);
+      if (Number.isFinite(audio.duration)) {
+        setDuration(audio.duration);
+      }
     };
 
     const handleEnded = () => {
       setIsPlaying(false);
       setCurrentTime(0);
+      audio.currentTime = 0;
+    };
+
+    const handlePlay = () => {
+      setIsPlaying(true);
+    };
+
+    const handlePause = () => {
+      setIsPlaying(false);
+    };
+
+    const handleError = () => {
+      console.error(
+        "Music failed to load:",
+        audio.error,
+        "\nMusic URL:",
+        audio.currentSrc
+      );
     };
 
     audio.addEventListener("timeupdate", handleTimeUpdate);
     audio.addEventListener("loadedmetadata", handleLoadedMetadata);
     audio.addEventListener("ended", handleEnded);
+    audio.addEventListener("play", handlePlay);
+    audio.addEventListener("pause", handlePause);
+    audio.addEventListener("error", handleError);
 
     return () => {
       audio.removeEventListener("timeupdate", handleTimeUpdate);
       audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
       audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("pause", handlePause);
+      audio.removeEventListener("error", handleError);
     };
   }, []);
 
