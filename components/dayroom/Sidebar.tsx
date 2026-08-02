@@ -2,11 +2,9 @@
 
 import React, { useMemo, useState } from "react";
 import {
-  FileText,
-  ListTodo,
   CalendarDays,
-  ChevronRight,
   ChevronLeft,
+  ChevronRight,
   ArrowLeft,
 } from "lucide-react";
 
@@ -16,13 +14,9 @@ interface SidebarProps {
   setActiveMenu: (menu: string | null) => void;
 }
 
-/* =========================================================
-   TYPES
-========================================================= */
-
 interface BigDay {
-  date: string;
   month: number;
+  date: number;
   title: string;
 }
 
@@ -32,89 +26,128 @@ interface MonthGroup {
   events: BigDay[];
 }
 
-/* =========================================================
-   BIG DAYS DATA
-   2026
-========================================================= */
+type BigDaysView = "current" | "months" | "month-detail";
 
 const BIG_DAYS: BigDay[] = [
+  // JANUARY
   {
-    date: "1",
     month: 1,
+    date: 1,
     title: "Tahun Baru Masehi",
   },
-  {
-    date: "16",
-    month: 1,
-    title: "Isra Mikraj Nabi Muhammad SAW",
-  },
 
+  // FEBRUARY
   {
-    date: "17",
     month: 2,
-    title: "Tahun Baru Imlek",
+    date: 14,
+    title: "Hari Valentine",
   },
 
+  // MARCH
   {
-    date: "19",
     month: 3,
-    title: "Hari Suci Nyepi",
+    date: 8,
+    title: "Hari Perempuan Internasional",
   },
 
+  // APRIL
   {
-    date: "3",
     month: 4,
-    title: "Wafat Yesus Kristus",
-  },
-  {
-    date: "5",
-    month: 4,
-    title: "Paskah",
+    date: 21,
+    title: "Hari Kartini",
   },
 
+  // MAY
   {
-    date: "1",
     month: 5,
+    date: 1,
     title: "Hari Buruh Internasional",
   },
   {
-    date: "14",
     month: 5,
-    title: "Kenaikan Yesus Kristus",
+    date: 2,
+    title: "Hari Pendidikan Nasional",
   },
   {
-    date: "27",
     month: 5,
-    title: "Idul Adha",
+    date: 20,
+    title: "Hari Kebangkitan Nasional",
   },
 
+  // JUNE
   {
-    date: "1",
     month: 6,
+    date: 1,
     title: "Hari Lahir Pancasila",
   },
   {
-    date: "16",
     month: 6,
-    title: "1 Muharam / Tahun Baru Islam",
+    date: 5,
+    title: "Hari Lingkungan Hidup Sedunia",
   },
 
+  // JULY
   {
-    date: "17",
+    month: 7,
+    date: 23,
+    title: "Hari Anak Nasional",
+  },
+
+  // AUGUST
+  {
     month: 8,
+    date: 17,
     title: "Hari Kemerdekaan Republik Indonesia",
   },
 
+  // SEPTEMBER
   {
-    date: "25",
+    month: 9,
+    date: 9,
+    title: "Hari Olahraga Nasional",
+  },
+
+  // OCTOBER
+  {
+    month: 10,
+    date: 2,
+    title: "Hari Batik Nasional",
+  },
+  {
+    month: 10,
+    date: 5,
+    title: "Hari Tentara Nasional Indonesia",
+  },
+  {
+    month: 10,
+    date: 28,
+    title: "Hari Sumpah Pemuda",
+  },
+
+  // NOVEMBER
+  {
+    month: 11,
+    date: 10,
+    title: "Hari Pahlawan",
+  },
+  {
     month: 12,
+    date: 25,
+    title: "Hari Natal",
+  },
+
+  // DECEMBER
+  {
+    month: 12,
+    date: 22,
+    title: "Hari Ibu",
+  },
+  {
+    month: 12,
+    date: 25,
     title: "Hari Natal",
   },
 ];
-
-/* =========================================================
-   HELPERS
-========================================================= */
 
 const MONTH_NAMES = [
   "January",
@@ -131,22 +164,17 @@ const MONTH_NAMES = [
   "December",
 ];
 
-const getMonthName = (month: number) => {
-  return MONTH_NAMES[month - 1] ?? "";
-};
-
-/* =========================================================
-   COMPONENT
-========================================================= */
-
 const Sidebar: React.FC<SidebarProps> = ({
   className = "",
   activeMenu,
   setActiveMenu,
 }) => {
-  const [bigDaysView, setBigDaysView] = useState<
-    "current" | "months" | "month-detail"
-  >("current");
+  /* =========================================================
+     STATE
+  ========================================================= */
+
+  const [bigDaysView, setBigDaysView] =
+    useState<BigDaysView>("current");
 
   const [selectedMonth, setSelectedMonth] =
     useState<number | null>(null);
@@ -155,38 +183,43 @@ const Sidebar: React.FC<SidebarProps> = ({
      CURRENT MONTH
   ========================================================= */
 
-  const currentMonth = new Date().getMonth() + 1;
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth() + 1;
+
+  /* =========================================================
+     HELPERS
+  ========================================================= */
+
+  const getMonthName = (month: number) => {
+    return MONTH_NAMES[month - 1] ?? "";
+  };
+
+  /* =========================================================
+     CURRENT MONTH EVENTS
+  ========================================================= */
 
   const currentMonthEvents = useMemo(() => {
     return BIG_DAYS.filter(
-      (item) => item.month === currentMonth
+      (event) => event.month === currentMonth
     );
   }, [currentMonth]);
 
   /* =========================================================
-     GROUP MONTHS
+     GROUP BY MONTH
   ========================================================= */
 
   const monthGroups = useMemo<MonthGroup[]>(() => {
-    const groups = new Map<number, BigDay[]>();
+    return MONTH_NAMES.map((monthName, index) => {
+      const month = index + 1;
 
-    BIG_DAYS.forEach((item) => {
-      const existing = groups.get(item.month);
-
-      if (existing) {
-        existing.push(item);
-      } else {
-        groups.set(item.month, [item]);
-      }
-    });
-
-    return Array.from(groups.entries())
-      .sort(([monthA], [monthB]) => monthA - monthB)
-      .map(([month, events]) => ({
+      return {
         month,
-        monthName: getMonthName(month),
-        events,
-      }));
+        monthName,
+        events: BIG_DAYS.filter(
+          (event) => event.month === month
+        ),
+      };
+    }).filter((group) => group.events.length > 0);
   }, []);
 
   /* =========================================================
@@ -194,29 +227,18 @@ const Sidebar: React.FC<SidebarProps> = ({
   ========================================================= */
 
   const selectedMonthGroup = useMemo(() => {
-    if (!selectedMonth) {
-      return null;
-    }
+    if (!selectedMonth) return null;
 
     return (
       monthGroups.find(
         (group) => group.month === selectedMonth
       ) ?? null
     );
-  }, [monthGroups, selectedMonth]);
+  }, [selectedMonth, monthGroups]);
 
   /* =========================================================
-     MENU
+     BIG DAYS OPEN / CLOSE
   ========================================================= */
-
-  const handleMenuClick = (menu: string) => {
-    setBigDaysView("current");
-    setSelectedMonth(null);
-
-    setActiveMenu(
-      activeMenu === menu ? null : menu
-    );
-  };
 
   const handleBigDaysClick = () => {
     if (activeMenu === "big-days") {
@@ -237,10 +259,11 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   const handleViewAll = () => {
     setBigDaysView("months");
+    setSelectedMonth(null);
   };
 
   /* =========================================================
-     MONTH
+     MONTH CLICK
   ========================================================= */
 
   const handleMonthClick = (month: number) => {
@@ -264,88 +287,16 @@ const Sidebar: React.FC<SidebarProps> = ({
     }
   };
 
-  /* =========================================================
-     NORMAL MENU ITEMS
-  ========================================================= */
+  const bigDayActive = activeMenu === "big-days";
 
-  const menuItems = [
-    {
-      id: "events",
-      label: "Events",
-      icon: ListTodo,
-    },
-    {
-      id: "notes",
-      label: "Notes",
-      icon: FileText,
-    },
-  ];
+  /* =========================================================
+     RENDER
+  ========================================================= */
 
   return (
     <aside
-      className={`
-        w-64
-        flex
-        flex-col
-        gap-3
-        ${className}
-      `}
+      className={`w-64 flex flex-col gap-3 ${className}`}
     >
-      {/* =====================================================
-          EVENTS + NOTES
-      ===================================================== */}
-
-      {menuItems.map((item) => {
-        const Icon = item.icon;
-        const active = activeMenu === item.id;
-
-        return (
-          <button
-            key={item.id}
-            type="button"
-            onClick={() =>
-              handleMenuClick(item.id)
-            }
-            className={`
-              flex
-              items-center
-              gap-3
-              w-full
-              rounded-xl
-              border-2
-              border-black
-              px-3
-              py-3
-              bg-[#FCF8ED]
-              shadow-[3px_3px_0_#000]
-              transition-all
-              duration-150
-              active:translate-x-[3px]
-              active:translate-y-[3px]
-              active:shadow-none
-              ${
-                active
-                  ? "bg-[#d0bdf4]"
-                  : "hover:bg-[#F7F1E3]"
-              }
-            `}
-          >
-            <Icon
-              size={22}
-              strokeWidth={2}
-            />
-
-            <span className="font-bold">
-              {item.label}
-            </span>
-          </button>
-        );
-      })}
-
-      {/* =====================================================
-          BIG DAYS CONTAINER
-      ===================================================== */}
-
       <div
         className={`
           w-full
@@ -359,7 +310,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           duration-300
           ease-[cubic-bezier(.16,1,.3,1)]
           ${
-            activeMenu === "big-days"
+            bigDayActive
               ? "shadow-[2px_2px_0_#000]"
               : ""
           }
@@ -372,6 +323,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         <button
           type="button"
           onClick={handleBigDaysClick}
+          aria-expanded={bigDayActive}
           className={`
             flex
             items-center
@@ -384,7 +336,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             transition-colors
             duration-200
             ${
-              activeMenu === "big-days"
+              bigDayActive
                 ? "bg-[#d0bdf4]"
                 : "hover:bg-[#F7F1E3]"
             }
@@ -407,7 +359,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               transition-transform
               duration-300
               ${
-                activeMenu === "big-days"
+                bigDayActive
                   ? "rotate-90"
                   : ""
               }
@@ -423,10 +375,10 @@ const Sidebar: React.FC<SidebarProps> = ({
           className={`
             grid
             transition-[grid-template-rows,opacity]
-            duration-400
+            duration-[400ms]
             ease-[cubic-bezier(.16,1,.3,1)]
             ${
-              activeMenu === "big-days"
+              bigDayActive
                 ? "grid-rows-[1fr] opacity-100"
                 : "grid-rows-[0fr] opacity-0"
             }
@@ -435,14 +387,18 @@ const Sidebar: React.FC<SidebarProps> = ({
           <div className="min-h-0 overflow-hidden">
             <div
               className={`
+                max-h-[500px]
+                overflow-y-auto
+                overflow-x-hidden
+                scrollbar-hide
                 px-3
                 pb-3
                 transform
                 transition-all
-                duration-400
+                duration-[400ms]
                 ease-[cubic-bezier(.16,1,.3,1)]
                 ${
-                  activeMenu === "big-days"
+                  bigDayActive
                     ? "translate-y-0 scale-100"
                     : "-translate-y-3 scale-[0.96]"
                 }
@@ -461,9 +417,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                       </p>
 
                       <h3 className="text-lg font-black leading-tight">
-                        {getMonthName(
-                          currentMonth
-                        )}
+                        {getMonthName(currentMonth)}
                       </h3>
                     </div>
 
@@ -552,11 +506,12 @@ const Sidebar: React.FC<SidebarProps> = ({
                       font-bold
                       text-white
                       transition-all
-                      hover:translate-y-[-1px]
+                      hover:-translate-y-[1px]
                       active:translate-y-[2px]
                     "
                   >
                     View all big days
+
                     <ChevronRight size={14} />
                   </button>
                 </div>
@@ -657,8 +612,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   MONTH DETAIL
               ================================================= */}
 
-              {bigDaysView ===
-                "month-detail" &&
+              {bigDaysView === "month-detail" &&
                 selectedMonthGroup && (
                   <div className="pt-1">
                     <div className="mb-3 flex items-center gap-2">
@@ -682,9 +636,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                           active:translate-y-[1px]
                         "
                       >
-                        <ChevronLeft
-                          size={15}
-                        />
+                        <ChevronLeft size={15} />
                       </button>
 
                       <div>
