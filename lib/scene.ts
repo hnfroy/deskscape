@@ -44,24 +44,31 @@ export const SCENE = {
     },
 
     timeBox: {
-      left: 360,
-      bottom: 150,
-      w: 330,
-      h: 180,
+      left: 380,
+      bottom: 160,
+      w: 300,
+      h: 150,
     },
 
     musicBox: {
       left: 680,
       bottom: 140,
-      w: 350,
-      h: 240,
+      w: 340,
+      h: 230,
     },
 
     mug: {
       left: 200,
-      bottom: -20,
+      bottom: -10,
       w: 200,
       h: 200,
+    },
+
+    plant: {
+      right: 50,
+      bottom: 150,
+      w: 150,
+      h: 180,
     },
 
     quote: {
