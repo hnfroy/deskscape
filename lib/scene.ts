@@ -29,6 +29,13 @@ export const SCENE = {
   },
 
   objects: {
+    tempHumidity: {
+      w: 120,
+      h: 130,
+      right: 640,
+      top: 150,
+    },
+
     window: {
       right: 60,
       top: 50,

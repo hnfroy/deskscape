@@ -20,6 +20,7 @@ import TimeBox from "../dayroom/TimeBox";
 import MusicBox from "../music/MusicBox";
 import PlantPot from "../dayroom/PlantPot";
 import WallTable from "../dayroom/WallTable";
+import TempHumidityMeter from "../dayroom/TempHumidityMeter";
 
 interface Props {
   activeMenu: string | null;
@@ -70,6 +71,19 @@ export default function DeskScene({
         layer="window"
       >
         <Window />
+      </SceneObject>
+
+      <SceneObject
+        right={objects.tempHumidity.right}
+        top={objects.tempHumidity.top}
+        w={objects.tempHumidity.w}
+        h={objects.tempHumidity.h}
+        layer="decor"
+      >
+        <TempHumidityMeter
+          temperature={24}
+          humidity={68}
+        />
       </SceneObject>
 
       <SceneObject
