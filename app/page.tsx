@@ -7,7 +7,7 @@ import DesktopCanvas from "@/components/DesktopCanvas";
 import { asset } from "@/lib/path";
 
 export default function Home() {
-  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [activeMenu, setActiveMenu] = useState<string | null>("big-days");
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
