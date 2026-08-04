@@ -35,7 +35,18 @@ export default function Timebox() {
 
   const date = now.getDate();
 
-  const blink = now.getSeconds() % 2 === 0;
+  const [mounted, setMounted] = useState(false);
+  const [showColon, setShowColon] = useState(true);
+
+  useEffect(() => {
+    setMounted(true);
+
+    const interval = setInterval(() => {
+      setShowColon((prev) => !prev);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="relative w-full max-w-[405px]">
@@ -88,7 +99,7 @@ export default function Timebox() {
           display:flex;
           align-items:flex-end;
 
-          font-size:56px;
+          font-size:48px;
 
           font-weight:700;
 
@@ -150,7 +161,7 @@ export default function Timebox() {
           <span
             className="colon"
             style={{
-              opacity: blink ? 1 : 0.15,
+              opacity: showColon ? 1 : 0.15,
             }}
           >
             :
