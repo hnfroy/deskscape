@@ -36,6 +36,13 @@ export const SCENE = {
       h: 480,
     },
 
+    wallTable: {
+      right: 800,
+      top: 250,
+      w: 270,
+      h: 35,
+    },
+
     calendar: {
       right: 350,
       bottom: 120,

@@ -19,6 +19,7 @@ import { SCENE } from "@/lib/scene";
 import TimeBox from "../dayroom/TimeBox";
 import MusicBox from "../music/MusicBox";
 import PlantPot from "../dayroom/PlantPot";
+import WallTable from "../dayroom/WallTable";
 
 interface Props {
   activeMenu: string | null;
@@ -69,6 +70,16 @@ export default function DeskScene({
         layer="window"
       >
         <Window />
+      </SceneObject>
+
+      <SceneObject
+        right={objects.wallTable.right}
+        top={objects.wallTable.top}
+        w={objects.wallTable.w}
+        h={objects.wallTable.h}
+        layer="furniture"
+      >
+        <WallTable />
       </SceneObject>
 
       <SceneObject
