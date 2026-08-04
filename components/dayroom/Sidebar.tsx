@@ -8,6 +8,7 @@ import {
 
 import BigDays from "./BigDays";
 import ExperienceTip from "./ExperienceTip";
+import BuyMeCoffee from "./BuyMeCoffee";
 
 interface SidebarProps {
   className?: string;
@@ -65,6 +66,11 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* DESK TIP */}
 
       <ExperienceTip />
+
+      <div className="mt-auto">
+        <BuyMeCoffee />
+      </div>
+
     </aside>
   );
 };
