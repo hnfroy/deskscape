@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://hnfroy.github.io"),
 
   title: {
-    default: "DeskScape",
+    default: "DeskScape - An interactive desktop experience",
     template: "%s | DeskScape",
   },
 
