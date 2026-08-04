@@ -8,6 +8,8 @@ import {
   ArrowLeft,
 } from "lucide-react";
 
+import ExperienceTip from "./ExperienceTip";
+
 interface SidebarProps {
   className?: string;
   activeMenu: string | null;
@@ -169,9 +171,6 @@ const Sidebar: React.FC<SidebarProps> = ({
   activeMenu,
   setActiveMenu,
 }) => {
-  /* =========================================================
-     STATE
-  ========================================================= */
 
   const [bigDaysView, setBigDaysView] =
     useState<BigDaysView>("current");
@@ -179,34 +178,18 @@ const Sidebar: React.FC<SidebarProps> = ({
   const [selectedMonth, setSelectedMonth] =
     useState<number | null>(null);
 
-  /* =========================================================
-     CURRENT MONTH
-  ========================================================= */
-
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth() + 1;
-
-  /* =========================================================
-     HELPERS
-  ========================================================= */
 
   const getMonthName = (month: number) => {
     return MONTH_NAMES[month - 1] ?? "";
   };
-
-  /* =========================================================
-     CURRENT MONTH EVENTS
-  ========================================================= */
 
   const currentMonthEvents = useMemo(() => {
     return BIG_DAYS.filter(
       (event) => event.month === currentMonth
     );
   }, [currentMonth]);
-
-  /* =========================================================
-     GROUP BY MONTH
-  ========================================================= */
 
   const monthGroups = useMemo<MonthGroup[]>(() => {
     return MONTH_NAMES.map((monthName, index) => {
@@ -222,10 +205,6 @@ const Sidebar: React.FC<SidebarProps> = ({
     }).filter((group) => group.events.length > 0);
   }, []);
 
-  /* =========================================================
-     SELECTED MONTH
-  ========================================================= */
-
   const selectedMonthGroup = useMemo(() => {
     if (!selectedMonth) return null;
 
@@ -235,10 +214,6 @@ const Sidebar: React.FC<SidebarProps> = ({
       ) ?? null
     );
   }, [selectedMonth, monthGroups]);
-
-  /* =========================================================
-     BIG DAYS OPEN / CLOSE
-  ========================================================= */
 
   const handleBigDaysClick = () => {
     if (activeMenu === "big-days") {
@@ -253,27 +228,15 @@ const Sidebar: React.FC<SidebarProps> = ({
     setSelectedMonth(null);
   };
 
-  /* =========================================================
-     VIEW ALL
-  ========================================================= */
-
   const handleViewAll = () => {
     setBigDaysView("months");
     setSelectedMonth(null);
   };
 
-  /* =========================================================
-     MONTH CLICK
-  ========================================================= */
-
   const handleMonthClick = (month: number) => {
     setSelectedMonth(month);
     setBigDaysView("month-detail");
   };
-
-  /* =========================================================
-     BACK
-  ========================================================= */
 
   const handleBack = () => {
     if (bigDaysView === "month-detail") {
@@ -288,10 +251,6 @@ const Sidebar: React.FC<SidebarProps> = ({
   };
 
   const bigDayActive = activeMenu === "big-days";
-
-  /* =========================================================
-     RENDER
-  ========================================================= */
 
   return (
     <aside
@@ -309,17 +268,12 @@ const Sidebar: React.FC<SidebarProps> = ({
           transition-all
           duration-300
           ease-[cubic-bezier(.16,1,.3,1)]
-          ${
-            bigDayActive
-              ? "shadow-[2px_2px_0_#000]"
-              : ""
+          ${bigDayActive
+            ? "shadow-[2px_2px_0_#000]"
+            : ""
           }
         `}
       >
-        {/* ===================================================
-            BIG DAYS BUTTON
-        =================================================== */}
-
         <button
           type="button"
           onClick={handleBigDaysClick}
@@ -335,10 +289,9 @@ const Sidebar: React.FC<SidebarProps> = ({
             cursor-pointer
             transition-colors
             duration-200
-            ${
-              bigDayActive
-                ? "bg-[#d0bdf4]"
-                : "hover:bg-[#F7F1E3]"
+            ${bigDayActive
+              ? "bg-[#d0bdf4]"
+              : "hover:bg-[#F7F1E3]"
             }
           `}
         >
@@ -358,18 +311,13 @@ const Sidebar: React.FC<SidebarProps> = ({
             className={`
               transition-transform
               duration-300
-              ${
-                bigDayActive
-                  ? "rotate-90"
-                  : ""
+              ${bigDayActive
+                ? "rotate-90"
+                : ""
               }
             `}
           />
         </button>
-
-        {/* ===================================================
-            GENIE CONTENT
-        =================================================== */}
 
         <div
           className={`
@@ -377,10 +325,9 @@ const Sidebar: React.FC<SidebarProps> = ({
             transition-[grid-template-rows,opacity]
             duration-[400ms]
             ease-[cubic-bezier(.16,1,.3,1)]
-            ${
-              bigDayActive
-                ? "grid-rows-[1fr] opacity-100"
-                : "grid-rows-[0fr] opacity-0"
+            ${bigDayActive
+              ? "grid-rows-[1fr] opacity-100"
+              : "grid-rows-[0fr] opacity-0"
             }
           `}
         >
@@ -397,16 +344,12 @@ const Sidebar: React.FC<SidebarProps> = ({
                 transition-all
                 duration-[400ms]
                 ease-[cubic-bezier(.16,1,.3,1)]
-                ${
-                  bigDayActive
-                    ? "translate-y-0 scale-100"
-                    : "-translate-y-3 scale-[0.96]"
+                ${bigDayActive
+                  ? "translate-y-0 scale-100"
+                  : "-translate-y-3 scale-[0.96]"
                 }
               `}
             >
-              {/* =================================================
-                  CURRENT MONTH
-              ================================================= */}
 
               {bigDaysView === "current" && (
                 <div className="pt-1">
@@ -517,10 +460,6 @@ const Sidebar: React.FC<SidebarProps> = ({
                 </div>
               )}
 
-              {/* =================================================
-                  ALL MONTHS
-              ================================================= */}
-
               {bigDaysView === "months" && (
                 <div className="pt-1">
                   <div className="mb-3 flex items-center gap-2">
@@ -607,10 +546,6 @@ const Sidebar: React.FC<SidebarProps> = ({
                   </div>
                 </div>
               )}
-
-              {/* =================================================
-                  MONTH DETAIL
-              ================================================= */}
 
               {bigDaysView === "month-detail" &&
                 selectedMonthGroup && (
@@ -707,6 +642,8 @@ const Sidebar: React.FC<SidebarProps> = ({
           </div>
         </div>
       </div>
+
+      <ExperienceTip />
     </aside>
   );
 };
