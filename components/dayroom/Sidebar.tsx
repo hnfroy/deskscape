@@ -363,10 +363,6 @@ const Sidebar: React.FC<SidebarProps> = ({
                         {getMonthName(currentMonth)}
                       </h3>
                     </div>
-
-                    <div className="rounded-lg border-2 border-black bg-white px-2 py-1 text-xs font-bold shadow-[2px_2px_0_#000]">
-                      {currentMonthEvents.length}
-                    </div>
                   </div>
 
                   {currentMonthEvents.length > 0 ? (
