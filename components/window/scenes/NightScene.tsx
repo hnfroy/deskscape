@@ -45,9 +45,9 @@ export default function NightScene() {
 
         .moon{
           position:absolute;
-          right:10%;
+          right:20%;
           top:10%;
-          width:18%;
+          width:12%;
           z-index:4;
           animation:moonGlow 6s ease-in-out infinite;
         }
