@@ -21,6 +21,7 @@ import MusicBox from "../music/MusicBox";
 import PlantPot from "../dayroom/PlantPot";
 import WallTable from "../dayroom/WallTable";
 import TempHumidityMeter from "../dayroom/TempHumidityMeter";
+import Keynote from "../dayroom/Keynote";
 
 interface Props {
   activeMenu: string | null;
@@ -154,6 +155,16 @@ export default function DeskScene({
         layer="decor"
       >
         <QuoteFrame />
+      </SceneObject>
+
+      <SceneObject
+        left={objects.keynote.left}
+        top={objects.keynote.top}
+        w={objects.keynote.w}
+        h={objects.keynote.h}
+        layer="decor"
+      >
+        <Keynote />
       </SceneObject>
 
       {/* ================= UI ================= */}

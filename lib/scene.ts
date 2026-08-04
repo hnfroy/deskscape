@@ -92,6 +92,13 @@ export const SCENE = {
       h: 190,
     },
 
+    keynote: {
+      left: 500,
+      top: 370,
+      w: 120,
+      h: 120,
+    },
+
     sidebar: {
       left: 24,
       top: 100,
