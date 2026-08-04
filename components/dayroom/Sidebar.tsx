@@ -50,7 +50,6 @@ const Sidebar: React.FC<SidebarProps> = ({
         ${className}
       `}
     >
-      {/* BIG DAYS */}
 
       <BigDays
         active={activeMenu === "big-days"}
@@ -62,8 +61,6 @@ const Sidebar: React.FC<SidebarProps> = ({
           );
         }}
       />
-
-      {/* DESK TIP */}
 
       <ExperienceTip />
 
