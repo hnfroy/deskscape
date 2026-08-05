@@ -5,10 +5,12 @@ import { asset } from "@/lib/path";
 
 interface KeynoteProps {
   className?: string;
+  visitorCount?: number;
 }
 
 const Keynote: React.FC<KeynoteProps> = ({
   className = "",
+  visitorCount = 1284,
 }) => {
   return (
     <div
@@ -37,7 +39,7 @@ const Keynote: React.FC<KeynoteProps> = ({
 
         <img
           src={asset("/room/keynote.svg")}
-          alt="Keynote"
+          alt="Total visitors"
           draggable={false}
           className="
             absolute
@@ -49,33 +51,56 @@ const Keynote: React.FC<KeynoteProps> = ({
         />
 
         {/* =========================
-            TEXT
+            VISITOR CONTENT
         ========================= */}
 
         <div
           className="
+            pointer-events-none
             absolute
             inset-0
             flex
             items-center
             justify-center
-            pointer-events-none
           "
         >
-          <span
+          <div
             className="
-              translate-y-[1px]
-              whitespace-nowrap
+              flex
+              flex-col
+              items-center
+              justify-center
               text-center
-              text-[12px]
-              font-bold
-              leading-none
-              tracking-[-0.02em]
-              text-black
+              translate-y-[1px]
             "
           >
-            Buy me a coffee <br /><br /> ☕
-          </span>
+            <span
+              className="
+                text-[8px]
+                font-black
+                uppercase
+                leading-none
+                tracking-[0.08em]
+                text-black
+              "
+            >
+              Total Visitors
+            </span>
+
+            <span
+              className="
+                mt-[5px]
+                font-mono
+                text-[20px]
+                font-bold
+                leading-none
+                tracking-[-0.06em]
+                text-black
+              "
+            >
+              {visitorCount.toLocaleString()}
+            </span>
+          </div>
         </div>
       </div>
     </div>
