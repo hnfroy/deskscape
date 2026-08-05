@@ -33,7 +33,7 @@ export const SCENE = {
       w: 120,
       h: 130,
       right: 640,
-      top: 150,
+      top: 250,
     },
 
     window: {
