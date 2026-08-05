@@ -4,27 +4,50 @@ import { useEffect, useState } from "react";
 
 export default function ExperienceTip() {
   const [visible, setVisible] = useState(false);
+  const [countdown, setCountdown] = useState(10);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const showTimer = setTimeout(() => {
       setVisible(true);
     }, 2000);
 
     return () => {
-      clearTimeout(timer);
+      clearTimeout(showTimer);
     };
   }, []);
 
+  useEffect(() => {
+    if (!visible) return;
+
+    setCountdown(10);
+
+    const interval = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          setVisible(false);
+          return 0;
+        }
+
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [visible]);
+
   return (
-      <div
-          className={[
-              "w-full overflow-hidden",
-              "transition-all duration-500 ease-out overflow-hidden rounded-xl border-2-black bg-[#FCF8ED] shadow-[3px_3px_0_#000]",
+    <div
+      className={[
+        "w-full overflow-hidden",
+        "transition-all duration-500 ease-out overflow-hidden rounded-xl border-2-black bg-[#FCF8ED] shadow-[3px_3px_0_#000]",
         visible
-                  ? "max-h-[220px] translate-y-0 opacity-100"
-                  : "max-h-0 -translate-y-2 opacity-0",
-          ].join(" ")}
-      >
+          ? "max-h-[220px] translate-y-0 opacity-100"
+          : "max-h-0 -translate-y-2 opacity-0",
+      ].join(" ")}
+    >
       <div
         className="
           relative
@@ -35,10 +58,8 @@ export default function ExperienceTip() {
           p-3
         "
       >
-        <button
-          type="button"
-          onClick={() => setVisible(false)}
-          aria-label="Close"
+        {/* COUNTDOWN */}
+        <div
           className="
             absolute
             right-2
@@ -54,14 +75,12 @@ export default function ExperienceTip() {
             bg-white
             text-[10px]
             font-black
-            transition-transform
-            duration-150
-            hover:rotate-6
-            active:translate-y-[1px]
+            tabular-nums
           "
+          aria-label={`Closing in ${countdown} seconds`}
         >
-          ×
-        </button>
+          {countdown}
+        </div>
 
         <div className="pr-7">
           <p className="text-[9px] font-black uppercase tracking-[0.12em] text-black/40">
