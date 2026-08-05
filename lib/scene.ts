@@ -86,10 +86,17 @@ export const SCENE = {
     },
 
     plant: {
-      right: 50,
-      bottom: 150,
+      right: 170,
+      bottom: 130,
       w: 150,
       h: 180,
+    },
+
+    books: {
+      right: 20,
+      bottom: 105,
+      w: 190,
+      h: 340,
     },
 
     quote: {

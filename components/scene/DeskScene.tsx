@@ -23,6 +23,7 @@ import WallTable from "../dayroom/WallTable";
 import TempHumidityMeter from "../dayroom/TempHumidityMeter";
 import Keynote from "../dayroom/Keynote";
 import Camera from "../dayroom/Camera";
+import Books from "../dayroom/Books";
 
 interface Props {
   activeMenu: string | null;
@@ -157,6 +158,16 @@ export default function DeskScene({
         layer="decor"
       >
         <PlantPot />
+      </SceneObject>
+
+      <SceneObject
+        right={objects.books.right}
+        bottom={objects.books.bottom}
+        w={objects.books.w}
+        h={objects.books.h}
+        layer="furniture"
+      >
+        <Books />
       </SceneObject>
 
       <SceneObject
