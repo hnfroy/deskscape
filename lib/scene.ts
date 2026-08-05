@@ -65,10 +65,10 @@ export const SCENE = {
     },
 
     timeBox: {
-      left: 380,
-      bottom: 160,
-      w: 300,
-      h: 150,
+      left: 340,
+      bottom: 125,
+      w: 345,
+      h: 190,
     },
 
     musicBox: {
