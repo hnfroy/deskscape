@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import DeskScene from "@/components/scene/DeskScene";
 import DesktopCanvas from "@/components/DesktopCanvas";
 import { asset } from "@/lib/path";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function Home() {
   const [activeMenu, setActiveMenu] = useState<string | null>("big-days");
-
+  const [isLoading, setIsLoading] = useState(true);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -17,6 +18,10 @@ export default function Home() {
 
     audio.volume = 0.35;
     audio.loop = true;
+  }, []);
+
+  const handleLoadingComplete = useCallback(() => {
+    setIsLoading(false);
   }, []);
 
   return (
@@ -33,6 +38,12 @@ export default function Home() {
             setActiveMenu={setActiveMenu}
           />
       </DesktopCanvas>
+
+      {isLoading && (
+        <LoadingScreen
+          onComplete={handleLoadingComplete}
+        />
+      )}
     </>
   );
 }
