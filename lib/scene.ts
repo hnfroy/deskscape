@@ -86,7 +86,7 @@ export const SCENE = {
     },
 
     plant: {
-      right: 170,
+      right: 200,
       bottom: 130,
       w: 150,
       h: 180,
