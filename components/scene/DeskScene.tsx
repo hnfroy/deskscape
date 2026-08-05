@@ -22,6 +22,7 @@ import PlantPot from "../dayroom/PlantPot";
 import WallTable from "../dayroom/WallTable";
 import TempHumidityMeter from "../dayroom/TempHumidityMeter";
 import Keynote from "../dayroom/Keynote";
+import Camera from "../dayroom/Camera";
 
 interface Props {
   activeMenu: string | null;
@@ -88,6 +89,16 @@ export default function DeskScene({
       </SceneObject>
 
       <SceneObject
+        left={objects.camera.left}
+        top={objects.camera.top}
+        w={objects.camera.w}
+        h={objects.camera.h}
+        layer="wall"
+      >
+        <Camera />
+      </SceneObject>
+
+      <SceneObject
         right={objects.wallTable.right}
         top={objects.wallTable.top}
         w={objects.wallTable.w}
@@ -96,6 +107,7 @@ export default function DeskScene({
       >
         <WallTable />
       </SceneObject>
+
 
       <SceneObject
         right={objects.calendar.right}

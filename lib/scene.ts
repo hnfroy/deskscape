@@ -44,10 +44,17 @@ export const SCENE = {
     },
 
     wallTable: {
-      right: 800,
-      top: 250,
-      w: 270,
-      h: 35,
+      right: 780,
+      top: 200,
+      w: 300,
+      h: 40,
+    },
+
+    camera: {
+      left: 750,
+      top: 108,
+      w: 145,
+      h: 95,
     },
 
     calendar: {
