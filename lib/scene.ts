@@ -52,7 +52,7 @@ export const SCENE = {
 
     camera: {
       left: 750,
-      top: 108,
+      top: 110,
       w: 145,
       h: 95,
     },
