@@ -58,8 +58,8 @@ export const SCENE = {
     },
 
     calendar: {
-      right: 350,
-      bottom: 120,
+      right: 370,
+      bottom: 130,
       w: 380,
       h: 295,
     },
