@@ -21,7 +21,7 @@ export default function DeskSurface() {
           x2="1802"
           y2="173"
           stroke="black"
-          stroke-width="4"
+          strokeWidth="4"
         />
       </g>
       <defs>
@@ -34,7 +34,7 @@ export default function DeskSurface() {
           filterUnits="userSpaceOnUse"
           color-interpolation-filters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -79,9 +79,9 @@ export default function DeskSurface() {
           width="1800"
           height="4"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
