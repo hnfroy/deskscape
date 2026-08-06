@@ -80,7 +80,7 @@ export const SCENE = {
 
     mug: {
       left: 200,
-      bottom: -10,
+      bottom: 0,
       w: 200,
       h: 200,
     },

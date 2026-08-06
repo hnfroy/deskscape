@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { asset } from "@/lib/path";
+import {useVisitor} from "@/hooks/useVisitor";
 
 interface KeynoteProps {
   className?: string;
@@ -10,10 +11,11 @@ interface KeynoteProps {
 
 const Keynote: React.FC<KeynoteProps> = ({
   className = "",
-  visitorCount = 1284,
+  // visitorCount = 1284,
 }) => {
   const noteRef = useRef<HTMLDivElement>(null);
   const [isTouched, setIsTouched] = useState(false);
+  const visitorCount = useVisitor();
 
   const handleNoteClick = () => {
     if (isTouched) return;

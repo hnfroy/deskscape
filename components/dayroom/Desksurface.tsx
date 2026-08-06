@@ -21,7 +21,7 @@ export default function DeskSurface() {
           x2="1802"
           y2="173"
           stroke="black"
-          stroke-width="4"
+          strokeWidth="4"
         />
       </g>
       <g filter="url(#filter2_n_433_208)">
