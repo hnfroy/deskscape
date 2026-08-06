@@ -1,29 +1,34 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
+
+import { getSupabase } from "@/lib/supabase";
 
 export function useVisitor() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const visited = sessionStorage.getItem("deskscape-visited");
+    const loadVisitor = async () => {
+      const supabase = getSupabase();
 
-    if (visited) {
-      return;
-    }
+      const visited = sessionStorage.getItem("deskscape-visited");
 
-    const addVisitor = async () => {
-      const { data, error } = await supabase.rpc("increment_visitor");
+      if (!visited) {
+        await supabase.from("visitors").insert({
+          page: "deskscape",
+        });
 
-      if (!error && data) {
-        setCount(data);
+        sessionStorage.setItem("deskscape-visited", "true");
       }
 
-      sessionStorage.setItem("deskscape-visited", "true");
+      const { data, error } = await supabase.from("visitors").select("id");
+
+      if (!error && data) {
+        setCount(data.length);
+      }
     };
 
-    addVisitor();
+    loadVisitor();
   }, []);
 
   return count;
