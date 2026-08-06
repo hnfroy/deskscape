@@ -11,7 +11,6 @@ interface KeynoteProps {
 
 const Keynote: React.FC<KeynoteProps> = ({
   className = "",
-  // visitorCount = 1284,
 }) => {
   const noteRef = useRef<HTMLDivElement>(null);
   const [isTouched, setIsTouched] = useState(false);
