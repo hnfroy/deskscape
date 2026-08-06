@@ -21,8 +21,11 @@ export default function DeskSurface() {
           x2="1802"
           y2="173"
           stroke="black"
-          strokeWidth="4"
+          stroke-width="4"
         />
+      </g>
+      <g filter="url(#filter2_n_433_208)">
+        <rect x="4" y="175" width="1796" height="80" fill="#B99E7F" />
       </g>
       <defs>
         <filter
@@ -34,7 +37,7 @@ export default function DeskSurface() {
           filterUnits="userSpaceOnUse"
           color-interpolation-filters="sRGB"
         >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -79,7 +82,7 @@ export default function DeskSurface() {
           width="1800"
           height="4"
           filterUnits="userSpaceOnUse"
-          colorInterpolationFilters="sRGB"
+          color-interpolation-filters="sRGB"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
@@ -95,6 +98,53 @@ export default function DeskSurface() {
             numOctaves="3"
             result="noise"
             seed="1413"
+          />
+          <feComponentTransfer in="noise" result="coloredNoise1">
+            <feFuncR type="linear" slope="2" intercept="-0.5" />
+            <feFuncG type="linear" slope="2" intercept="-0.5" />
+            <feFuncB type="linear" slope="2" intercept="-0.5" />
+            <feFuncA
+              type="discrete"
+              tableValues="0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "
+            />
+          </feComponentTransfer>
+          <feComposite
+            operator="in"
+            in2="shape"
+            in="coloredNoise1"
+            result="noise1Clipped"
+          />
+          <feComponentTransfer in="noise1Clipped" result="color1">
+            <feFuncA type="table" tableValues="0 0.2" />
+          </feComponentTransfer>
+          <feMerge result="effect1_noise_433_208">
+            <feMergeNode in="shape" />
+            <feMergeNode in="color1" />
+          </feMerge>
+        </filter>
+        <filter
+          id="filter2_n_433_208"
+          x="4"
+          y="175"
+          width="1796"
+          height="80"
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
+        >
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="BackgroundImageFix"
+            result="shape"
+          />
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="1 1"
+            stitchTiles="stitch"
+            numOctaves="3"
+            result="noise"
+            seed="2350"
           />
           <feComponentTransfer in="noise" result="coloredNoise1">
             <feFuncR type="linear" slope="2" intercept="-0.5" />
