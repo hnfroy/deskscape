@@ -41,9 +41,7 @@ export default function DeskScene({
   } = SCENE;
 
   return (
-    <>
-      {/* ================= Background ================= */}
-
+    <div data-desk-scene>
       <SceneObject
         left={0}
         top={0}
@@ -213,6 +211,6 @@ export default function DeskScene({
       >
         <Navbar />
       </SceneObject>
-    </>
+    </div>
   );
 }
