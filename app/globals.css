@@ -5,6 +5,18 @@
   --color-desk-ink: #1d1e1e;
 }
 
+/* Prevent text selection */
+* {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Prevent image dragging */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
 body {
   background-color: var(--color-desk-bg);
   color: var(--color-desk-ink);
