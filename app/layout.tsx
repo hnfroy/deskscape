@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
-import { useEffect } from "react";
+import Protection from "./Protection";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hnfroy.github.io"),
@@ -86,26 +86,10 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  useEffect(() => {
-    const handleContextMenu = (e: MouseEvent) => {
-      e.preventDefault();
-    };
-
-    document.addEventListener(
-      "contextmenu",
-      handleContextMenu
-    );
-
-    return () => {
-      document.removeEventListener(
-        "contextmenu",
-        handleContextMenu
-      );
-    };
-  }, []);
   return (
     <html lang="en">
       <body>{children}</body>
+      <Protection />
     </html>
   );
 }
