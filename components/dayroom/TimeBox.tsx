@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function Timebox() {
   const [now, setNow] = useState(new Date());
+  const [isGlitching, setIsGlitching] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -48,8 +49,18 @@ export default function Timebox() {
     return () => clearInterval(interval);
   }, []);
 
+  const handleGlitch = () => {
+    if (isGlitching) return;
+
+    setIsGlitching(true);
+
+    window.setTimeout(() => {
+      setIsGlitching(false);
+    }, 650);
+  };
+
   return (
-    <div className="relative w-full max-w-[405px]">
+    <div className="relative w-full max-w-[405px] cursor-pointer" onClick={handleGlitch}>
 
       <style>{`
 
@@ -112,6 +123,68 @@ export default function Timebox() {
 
         }
 
+        @keyframes timebox-glitch {
+
+          0% {
+            opacity: 1;
+            transform: translate(0);
+            filter: none;
+          }
+
+          10% {
+            opacity: .35;
+            transform: translate(-2px, 1px);
+            filter: blur(1px);
+          }
+
+          20% {
+            opacity: 1;
+            transform: translate(2px, -1px);
+            filter: none;
+          }
+
+          30% {
+            opacity: .2;
+            transform: translate(-1px, 0);
+            filter: blur(2px);
+          }
+
+          42% {
+            opacity: .8;
+            transform: translate(2px, 1px);
+            filter: blur(.5px);
+          }
+
+          55% {
+            opacity: .25;
+            transform: translate(-2px, 0);
+            filter: blur(1.5px);
+          }
+
+          70% {
+            opacity: 1;
+            transform: translate(1px, 0);
+            filter: none;
+          }
+
+          85% {
+            opacity: .6;
+            transform: translate(0);
+            filter: blur(.5px);
+          }
+
+          100% {
+            opacity: 1;
+            transform: translate(0);
+            filter: none;
+          }
+
+        }
+
+        .clock.glitch {
+          animation: timebox-glitch 650ms steps(1, end);
+        }
+
         .colon{
 
           width:42px;
@@ -154,7 +227,7 @@ export default function Timebox() {
 
       <div className="display">
 
-        <div className="clock">
+        <div className={`clock ${isGlitching ? "glitch" : ""}`}>
 
           <span>{hourOnly}</span>
 
