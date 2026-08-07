@@ -67,9 +67,6 @@ const Keynote: React.FC<KeynoteProps> = ({
         ${className}
       `}
     >
-      {/* =========================
-          KEYNOTE
-      ========================= */}
 
       <div
         className="
@@ -78,10 +75,6 @@ const Keynote: React.FC<KeynoteProps> = ({
           rotate-[-5deg]
         "
       >
-        {/* =========================
-            NOTE GROUP
-            SVG + TEXT bergerak bersama
-        ========================= */}
 
         <div
           ref={noteRef}
@@ -92,9 +85,6 @@ const Keynote: React.FC<KeynoteProps> = ({
             will-change-transform
           "
         >
-          {/* =========================
-              NOTE SVG
-          ========================= */}
 
           <img
             src={asset("/wall/note/note.svg")}
@@ -108,10 +98,6 @@ const Keynote: React.FC<KeynoteProps> = ({
               object-contain
             "
           />
-
-          {/* =========================
-              VISITOR TEXT
-          ========================= */}
 
           <div
             className="
@@ -163,11 +149,6 @@ const Keynote: React.FC<KeynoteProps> = ({
           </div>
         </div>
 
-        {/* =========================
-            TAPE
-            Tetap diam
-        ========================= */}
-
         <img
           src={asset("/wall/note/tape.svg")}
           alt=""
@@ -183,10 +164,6 @@ const Keynote: React.FC<KeynoteProps> = ({
             object-contain
           "
         />
-
-        {/* =========================
-            CLICK AREA
-        ========================= */}
 
         <button
           type="button"
