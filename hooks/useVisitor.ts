@@ -1,35 +1,61 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import { getSupabase } from "@/lib/supabase";
 
 export function useVisitor() {
-  const [count, setCount] = useState(0);
+  const [visitorCount, setVisitorCount] = useState(0);
 
   useEffect(() => {
-    const loadVisitor = async () => {
-      const supabase = getSupabase();
+    const trackVisitor = async () => {
+      try {
+        const supabase = getSupabase();
 
-      const visited = sessionStorage.getItem("deskscape-visited");
+        // Cek apakah browser/session ini sudah pernah dihitung
+        const alreadyVisited =
+          sessionStorage.getItem("deskscape-visited");
 
-      if (!visited) {
-        await supabase.from("visitors").insert({
-          page: "deskscape",
-        });
+        // Ambil counter dari Supabase
+        const { data, error: fetchError } = await supabase
+          .from("visitor_counter")
+          .select("count")
+          .eq("id", 1)
+          .single();
 
-        sessionStorage.setItem("deskscape-visited", "true");
-      }
+        if (fetchError) {
+          console.error("VISITOR FETCH ERROR:", fetchError);
+          return;
+        }
 
-      const { data, error } = await supabase.from("visitors").select("id");
+        let count = data?.count ?? 0;
 
-      if (!error && data) {
-        setCount(data.length);
+        // Hanya tambah sekali per session
+        if (!alreadyVisited) {
+          count += 1;
+
+          const { error: updateError } = await supabase
+            .from("visitor_counter")
+            .update({ count })
+            .eq("id", 1);
+
+          if (updateError) {
+            console.error("VISITOR UPDATE ERROR:", updateError);
+            return;
+          }
+
+          sessionStorage.setItem("deskscape-visited", "true");
+        }
+
+        setVisitorCount(count);
+
+        console.log("VISITOR COUNT:", count);
+      } catch (error) {
+        console.error("VISITOR ERROR:", error);
       }
     };
 
-    loadVisitor();
+    trackVisitor();
   }, []);
 
-  return count;
+  return visitorCount;
 }
