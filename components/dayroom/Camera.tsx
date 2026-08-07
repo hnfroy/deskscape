@@ -77,53 +77,32 @@ const Camera: React.FC<CameraProps> = ({
     let video: HTMLVideoElement | null = null;
 
     try {
-      /*
-       * SHUTTER EFFECT
-       */
+
       playShutter();
       showFlash();
 
-      /*
-       * CAPTURE CURRENT BROWSER TAB
-       *
-       * preferCurrentTab:
-       * Browser akan memprioritaskan tab yang sedang aktif.
-       *
-       * selfBrowserSurface:
-       * Memungkinkan current tab dipilih.
-       */
-      stream = await navigator.mediaDevices.getDisplayMedia({
+      const displayMediaOptions = {
         video: {
           displaySurface: "browser",
         },
         audio: false,
 
-        // Chrome-specific hints
-        // @ts-expect-error Browser-specific MediaTrackConstraints
         preferCurrentTab: true,
-
-        // @ts-expect-error Browser-specific MediaTrackConstraints
         selfBrowserSurface: "include",
-
-        // @ts-expect-error Browser-specific MediaTrackConstraints
         surfaceSwitching: "exclude",
-
-        // @ts-expect-error Browser-specific MediaTrackConstraints
         systemAudio: "exclude",
-      });
+      } as DisplayMediaStreamOptions & Record<string, unknown>;
+
+      stream = await navigator.mediaDevices.getDisplayMedia(
+        displayMediaOptions
+      );
 
       const track = stream.getVideoTracks()[0];
 
       if (!track) {
         throw new Error("No video track available.");
       }
-
-      /*
-       * VIDEO ELEMENT
-       *
-       * Kita tidak memasukkannya ke DOM.
-       * Video hanya dipakai sebagai source frame.
-       */
+ 
       video = document.createElement("video");
 
       video.srcObject = stream;
@@ -133,11 +112,7 @@ const Camera: React.FC<CameraProps> = ({
       await video.play();
 
       await waitForVideoFrame(video);
-
-      /*
-       * Tunggu sedikit supaya browser sudah
-       * benar-benar memberikan frame terbaru.
-       */
+ 
       await new Promise((resolve) =>
         requestAnimationFrame(() => resolve(null))
       );
@@ -157,16 +132,7 @@ const Camera: React.FC<CameraProps> = ({
         "x",
         height
       );
-
-      /*
-       * CANVAS SAMA PERSIS DENGAN UKURAN FRAME
-       *
-       * Tidak ada:
-       * - crop
-       * - scaling
-       * - offset
-       * - scene calculation
-       */
+ 
       const canvas = document.createElement("canvas");
 
       canvas.width = width;
@@ -177,10 +143,7 @@ const Camera: React.FC<CameraProps> = ({
       if (!context) {
         throw new Error("Could not create canvas context.");
       }
-
-      /*
-       * Capture frame yang sedang terlihat
-       */
+ 
       context.drawImage(
         video,
         0,
@@ -188,10 +151,7 @@ const Camera: React.FC<CameraProps> = ({
         width,
         height
       );
-
-      /*
-       * Pastikan screenshot benar-benar punya pixel
-       */
+ 
       const image = canvas.toDataURL(
         "image/png",
         1.0
@@ -202,15 +162,9 @@ const Camera: React.FC<CameraProps> = ({
           "Screenshot generated an empty image."
         );
       }
-
-      /*
-       * Simpan hasil screenshot
-       */
+ 
       setPreview(image);
-
-      /*
-       * Stop screen capture setelah frame berhasil
-       */
+ 
       track.stop();
 
       stream.getTracks().forEach((track) => {
@@ -223,11 +177,7 @@ const Camera: React.FC<CameraProps> = ({
         "DESKSCAPE screenshot failed:",
         error
       );
-
-      /*
-       * User menekan Cancel di browser
-       * tidak perlu dianggap sebagai error fatal.
-       */
+ 
       if (
         error instanceof DOMException &&
         error.name === "AbortError"
@@ -237,18 +187,13 @@ const Camera: React.FC<CameraProps> = ({
         );
       }
     } finally {
-      /*
-       * Bersihkan video
-       */
+
       if (video) {
         video.pause();
         video.srcObject = null;
         video.remove();
       }
-
-      /*
-       * Safety cleanup
-       */
+ 
       if (stream) {
         stream.getTracks().forEach((track) => {
           track.stop();
@@ -277,11 +222,7 @@ const Camera: React.FC<CameraProps> = ({
   };
 
   return (
-    <>
-      {/* =====================================================
-          CAMERA
-      ===================================================== */}
-
+    <> 
       <button
         type="button"
         onClick={handleCapture}
@@ -317,18 +258,10 @@ const Camera: React.FC<CameraProps> = ({
           "
         />
       </button>
-
-      {/* =====================================================
-          PORTAL
-      ===================================================== */}
-
+ 
       {typeof document !== "undefined" &&
         createPortal(
           <>
-            {/* =================================================
-                CAMERA FLASH
-            ================================================= */}
-
             {flash && (
               <div
                 className="
@@ -341,11 +274,6 @@ const Camera: React.FC<CameraProps> = ({
                 "
               />
             )}
-
-            {/* =================================================
-                PREVIEW MODAL
-            ================================================= */}
-
             {preview && (
               <div
                 className="
@@ -440,10 +368,6 @@ const Camera: React.FC<CameraProps> = ({
                       ×
                     </button>
                   </div>
-
-                  {/* =================================================
-                      REAL VIEWPORT SCREENSHOT
-                  ================================================= */}
 
                   <div
                     className="
