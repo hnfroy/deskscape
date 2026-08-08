@@ -58,38 +58,45 @@ export const SCENE = {
     },
 
     calendar: {
-      right: 370,
+      right: 280,
       bottom: 130,
       w: 380,
       h: 295,
     },
 
     timeBox: {
-      left: 340,
-      bottom: 125,
-      w: 345,
-      h: 190,
+      left: 330,
+      bottom: 150,
+      w: 300,
+      h: 145,
+    },
+
+    deskMail:{
+      left: 630,
+      bottom: 140,
+      w: 200,
+      h: 140,
     },
 
     musicBox: {
-      left: 680,
-      bottom: 140,
-      w: 340,
-      h: 230,
+      left: 840,
+      bottom: 150,
+      w: 300,
+      h: 190,
     },
 
     mug: {
-      left: 200,
+      left: 180,
       bottom: 0,
       w: 200,
       h: 200,
     },
 
     plant: {
-      right: 200,
+      right: 180,
       bottom: 130,
-      w: 150,
-      h: 180,
+      w: 120,
+      h: 150,
     },
 
     books: {

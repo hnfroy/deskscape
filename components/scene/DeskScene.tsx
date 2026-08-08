@@ -24,6 +24,7 @@ import TempHumidityMeter from "../dayroom/TempHumidityMeter";
 import Keynote from "../dayroom/Keynote";
 import Camera from "../dayroom/Camera";
 import Books from "../dayroom/Books";
+import DeskMail from "../dayroom/DeskMail";
 
 interface Props {
   activeMenu: string | null;
@@ -138,12 +139,22 @@ export default function DeskScene({
       <MusicBox />
     </SceneObject>
 
+    <SceneObject
+      left={objects.deskMail.left}
+      bottom={objects.deskMail.bottom}
+      w={objects.deskMail.w}
+      h={objects.deskMail.h}
+      layer="modal"
+    >
+      <DeskMail />
+    </SceneObject>
+
       <SceneObject
         left={objects.mug.left}
         bottom={objects.mug.bottom}
         w={objects.mug.w}
         h={objects.mug.h}
-        layer="decor"
+        layer="desk"
       >
         <Mug />
       </SceneObject>
